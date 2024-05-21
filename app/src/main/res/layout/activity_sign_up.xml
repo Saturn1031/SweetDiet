@@ -22,10 +22,20 @@
         android:src="@drawable/logo2" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:hint="User Name"
+        android:textSize="14sp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/edittext_shape"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:hint="Email"
         android:textSize="14sp"
         android:inputType="textEmailAddress"
@@ -42,13 +52,13 @@
         android:background="@drawable/edittext_shape"/>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:enabled="false"
         android:background="@drawable/button_shape"
-        android:text="Login"
+        android:text="Sign Up"
         android:textSize="16sp"
         />
 
@@ -59,59 +69,13 @@
         android:background="#FFD9D9DE"/>
 
     <TextView
-        android:id="@+id/signUp"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:textSize="14sp"
-        android:text="Sign up"
+        android:text="Login"
         android:textColor="#FF3366BB"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/googleLogin"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:orientation="horizontal"
-            android:background="@drawable/layout_shape"
-            android:gravity="center"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:adjustViewBounds="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/google_logo"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/kakaoLogin"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="40dp"
-            android:orientation="horizontal"
-            android:background="@drawable/kakaolayout_shape"
-            android:gravity="center"
-            android:clickable="true">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:adjustViewBounds="true"
-                android:background="@android:color/transparent"
-                android:src="@drawable/kakao_logo"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
 
 </LinearLayout>

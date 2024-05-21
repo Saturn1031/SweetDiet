@@ -75,7 +75,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/googleLogin"
+            android:id="@+id/btnGoogleLogin"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:orientation="horizontal"
@@ -93,7 +93,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/kakaoLogin"
+            android:id="@+id/btnKakaoLogin"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginLeft="40dp"

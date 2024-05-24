@@ -1,17 +1,16 @@
 package com.narae.sweetdiet
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.narae.sweetdiet.databinding.ActivityLoginBinding
-import com.narae.sweetdiet.databinding.ActivityMainBinding
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -20,6 +19,33 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnLogin.setOnClickListener {   // 로그인 Button
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
+            MyApplication.auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this){task ->
+                    binding.email.text.clear()
+                    binding.password.text.clear()
+                    if(task.isSuccessful){
+                        if(MyApplication.checkAuth()){
+                            MyApplication.email = email
+                            Log.d("mobileapp", "로그인 성공")
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        else{
+                            Toast.makeText(baseContext,"이메일 인증이 되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                            Log.d("mobileapp", "이메일 인증 안됨")
+                        }
+                    }
+                    else{
+                        Toast.makeText(baseContext,"로그인 실패", Toast.LENGTH_SHORT).show()
+                        Log.d("mobileapp", "로그인 실패")
+                    }
+                }
+        }
 
         binding.signUp.setOnClickListener {
             intent = Intent(this, SignUpActivity::class.java)

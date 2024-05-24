@@ -21,15 +21,15 @@
         android:adjustViewBounds="true"
         android:src="@drawable/logo2" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:hint="User Name"
-        android:textSize="14sp"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/edittext_shape"/>
+<!--    <EditText-->
+<!--        android:id="@+id/username"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:hint="User Name"-->
+<!--        android:textSize="14sp"-->
+<!--        android:inputType="textEmailAddress"-->
+<!--        android:background="@drawable/edittext_shape"/>-->
 
     <EditText
         android:id="@+id/email"
@@ -51,13 +51,13 @@
         android:inputType="textPassword"
         android:background="@drawable/edittext_shape"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:enabled="false"
         android:background="@drawable/button_shape"
+        android:backgroundTint="@color/orange"
         android:text="Sign Up"
         android:textSize="16sp"
         />

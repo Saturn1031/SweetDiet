@@ -59,6 +59,7 @@
         android:background="@drawable/button_shape"
         android:backgroundTint="@color/orange"
         android:text="Sign Up"
+        android:textColor="@color/white"
         android:textSize="16sp"
         />
 

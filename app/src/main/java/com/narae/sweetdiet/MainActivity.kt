@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         // 뷰페이저 어댑터 설정
         binding.viewpager.adapter = MyFragmentPagerAdapter(this)
 
+        binding.viewpager.isUserInputEnabled = false
+
         // 탭 레이아웃과 뷰페이저 연결
         TabLayoutMediator(binding.tabs, binding.viewpager) { tab, position ->
             when (position) {

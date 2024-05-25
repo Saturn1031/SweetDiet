@@ -1,6 +1,10 @@
 package com.narae.sweetdiet
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,10 +29,15 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentRecord : Fragment() {
+    // 달력
     val itemList = arrayListOf<Date>()
     val listAdapter = CalendarAdapter(itemList)
     lateinit var calendarList: RecyclerView
     lateinit var mLayoutManager: LinearLayoutManager
+
+    // 아코디언
+    private lateinit var personList: List<Meal>
+    private lateinit var adapter: ExpandableAdapter
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -71,6 +80,62 @@ class FragmentRecord : Fragment() {
             }
         })
 
+        // 아코디언
+        val recyclerView = binding.recyclerList
+
+        personList = ArrayList()
+        personList = loadData()
+
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = ExpandableAdapter(personList)
+        recyclerView.adapter = adapter
+
+        // 식사 추가하기
+        val items = arrayOf<String>("아침", "점심", "저녁", "간식")
+        // 선택된 아이템의 인덱스를 저장할 변수
+        var selected = 0
+
+        val eventHandler = object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                val intent = Intent(requireContext(), AddMealActivity::class.java)
+
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    Log.d("mobileapp", "BUTTON_POSITIVE")
+                    if (items[selected].equals("아침")) {
+                        intent.putExtra("checked", "아침")
+                    } else if (items[selected].equals("점심")) {
+                        intent.putExtra("checked", "점심")
+                    } else if (items[selected].equals("저녁")) {
+                        intent.putExtra("checked", "저녁")
+                    }   else if (items[selected].equals("간식")) {
+                        intent.putExtra("checked", "간식")
+                    }
+                } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    Log.d("mobileapp", "BUTTON_NEGATIVE")
+                }
+                startActivity(intent)
+            }
+        }
+
+        binding.btnAddMeal.setOnClickListener {
+            // 하나만 선택 가능한 알림창 만들기
+            AlertDialog.Builder(context).run() {
+                setTitle("알림 - 색상 선택")
+//                setIcon(android.R.drawable.ic_dialog_alert)
+
+                // setSingleChoiceItems: 선택될 아이템들 설정 (아이템 배열, 기본 체크될 인덱스, 아이템 클릭 리스너)
+                setSingleChoiceItems(items,0, object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        selected = which
+                    }
+                })
+                setPositiveButton("예", eventHandler)
+                setNegativeButton("아니오", eventHandler)
+                show()
+            }
+        }
+
         return binding.root
     }
 
@@ -91,6 +156,21 @@ class FragmentRecord : Fragment() {
             itemList.add(Date(dayOfWeekString, i.toString()))
         }
         calendarList.adapter = listAdapter
+    }
+
+    // 아코디언
+    private fun loadData(): List<Meal> {
+        val meals = ArrayList<Meal>()
+
+        val mealStrings = resources.getStringArray(R.array.meal)
+
+        for (i in mealStrings.indices) {
+            val meal = Meal().apply {
+                name = mealStrings[i]
+            }
+            meals.add(meal)
+        }
+        return meals
     }
 
     companion object {

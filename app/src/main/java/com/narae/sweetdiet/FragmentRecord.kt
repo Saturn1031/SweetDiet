@@ -79,17 +79,6 @@ class FragmentRecord : Fragment() {
 
         setListView()
 
-        calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
-            override fun onClick(v: View, position: Int) {
-                // 클릭 시 이벤트 작성
-                Toast.makeText(view?.context,"${dateList[position].date}일 클릭", Toast.LENGTH_SHORT).show()
-
-                val calendar = Calendar.getInstance()
-                val dateFormat = SimpleDateFormat("yyyyMM", Locale.getDefault())
-                selectedDate = dateFormat.format(calendar.time) + dateList[position].date
-            }
-        })
-
         // 아코디언
         val recyclerView = binding.recyclerList
 
@@ -100,6 +89,19 @@ class FragmentRecord : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         expandableAdapter = ExpandableAdapter(mealList, selectedDate, this)
         recyclerView.adapter = expandableAdapter
+
+        calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                // 클릭 시 이벤트 작성
+                Toast.makeText(view?.context,"${dateList[position].date}일 클릭", Toast.LENGTH_SHORT).show()
+
+                val calendar = Calendar.getInstance()
+                val dateFormat = SimpleDateFormat("yyyyMM", Locale.getDefault())
+                selectedDate = dateFormat.format(calendar.time) + dateList[position].date
+
+                expandableAdapter.selectedDate = selectedDate
+            }
+        })
 
         // 식사 추가하기
         val items = arrayOf<String>("아침", "점심", "저녁", "간식")

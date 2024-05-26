@@ -13,9 +13,10 @@ import com.narae.sweetdiet.databinding.ItemAccordionBinding
 
 class ExpandableAdapter(
     private val mealList: List<Meal>,
-    private val selectedDate: String,
+    private val selectedDateinit: String,
     private val fragmentRecord: FragmentRecord
 ) : RecyclerView.Adapter<ExpandableAdapter.MyViewHolder>() {
+    var selectedDate: String = selectedDateinit
 
     class MyViewHolder(
         val binding: ItemAccordionBinding
@@ -105,5 +106,4 @@ class ExpandableAdapter(
     override fun getItemCount(): Int {
         return mealList.size
     }
-
 }

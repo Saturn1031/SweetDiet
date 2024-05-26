@@ -1,5 +1,7 @@
 package com.narae.sweetdiet
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -10,10 +12,15 @@ class RetrofitConnection {
         private const val BASE_URL = "http://apis.data.go.kr/1470000/FoodNtrIrdntInfoService/"
 
         val jsonNetworkService: NetworkService
+
+        val gson : Gson = GsonBuilder()
+            .setLenient()
+            .create()
+
         val jsonRetrofit: Retrofit
             get() = Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
         init {

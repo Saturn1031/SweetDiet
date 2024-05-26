@@ -29,15 +29,21 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentRecord : Fragment() {
+    lateinit var binding: FragmentRecordBinding
+
     // 달력
-    val itemList = arrayListOf<Date>()
-    val listAdapter = CalendarAdapter(itemList)
+    val dateList = arrayListOf<Date>()
+    val calendarAdapter = CalendarAdapter(dateList)
     lateinit var calendarList: RecyclerView
     lateinit var mLayoutManager: LinearLayoutManager
 
+    val calendar = Calendar.getInstance()
+    val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+    var selectedDate = dateFormat.format(calendar.time)
+
     // 아코디언
-    private lateinit var personList: List<Meal>
-    private lateinit var adapter: ExpandableAdapter
+    private lateinit var mealList: List<Meal>
+    private lateinit var expandableAdapter: ExpandableAdapter
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -56,7 +62,7 @@ class FragmentRecord : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentRecordBinding.inflate(inflater, container, false)
+        binding = FragmentRecordBinding.inflate(inflater, container, false)
 
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("yyyy년 M월", Locale.getDefault())
@@ -73,23 +79,27 @@ class FragmentRecord : Fragment() {
 
         setListView()
 
-        listAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
+        calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
-                Toast.makeText(view?.context,"${itemList[position].date}일 클릭", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view?.context,"${dateList[position].date}일 클릭", Toast.LENGTH_SHORT).show()
+
+                val calendar = Calendar.getInstance()
+                val dateFormat = SimpleDateFormat("yyyyMM", Locale.getDefault())
+                selectedDate = dateFormat.format(calendar.time) + dateList[position].date
             }
         })
 
         // 아코디언
         val recyclerView = binding.recyclerList
 
-        personList = ArrayList()
-        personList = loadData()
+        mealList = ArrayList()
+        mealList = loadData()
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = ExpandableAdapter(personList)
-        recyclerView.adapter = adapter
+        expandableAdapter = ExpandableAdapter(mealList, selectedDate, this)
+        recyclerView.adapter = expandableAdapter
 
         // 식사 추가하기
         val items = arrayOf<String>("아침", "점심", "저녁", "간식")
@@ -103,25 +113,26 @@ class FragmentRecord : Fragment() {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
                     Log.d("mobileapp", "BUTTON_POSITIVE")
                     if (items[selected].equals("아침")) {
-                        intent.putExtra("checked", "아침")
+                        intent.putExtra("checkedMeal", "아침")
                     } else if (items[selected].equals("점심")) {
-                        intent.putExtra("checked", "점심")
+                        intent.putExtra("checkedMeal", "점심")
                     } else if (items[selected].equals("저녁")) {
-                        intent.putExtra("checked", "저녁")
+                        intent.putExtra("checkedMeal", "저녁")
                     }   else if (items[selected].equals("간식")) {
-                        intent.putExtra("checked", "간식")
+                        intent.putExtra("checkedMeal", "간식")
                     }
+                    intent.putExtra("selectedDate", selectedDate)
+                    startActivity(intent)
                 } else if (which == DialogInterface.BUTTON_NEGATIVE) {
                     Log.d("mobileapp", "BUTTON_NEGATIVE")
                 }
-                startActivity(intent)
             }
         }
 
         binding.btnAddMeal.setOnClickListener {
             // 하나만 선택 가능한 알림창 만들기
             AlertDialog.Builder(context).run() {
-                setTitle("알림 - 색상 선택")
+                setTitle("식사 종류 선택")
 //                setIcon(android.R.drawable.ic_dialog_alert)
 
                 // setSingleChoiceItems: 선택될 아이템들 설정 (아이템 배열, 기본 체크될 인덱스, 아이템 클릭 리스너)
@@ -153,9 +164,9 @@ class FragmentRecord : Fragment() {
             val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
 
             val dayOfWeekString = SimpleDateFormat("EEE", Locale.KOREA).format(cal.time)
-            itemList.add(Date(dayOfWeekString, i.toString()))
+            dateList.add(Date(dayOfWeekString, i.toString()))
         }
-        calendarList.adapter = listAdapter
+        calendarList.adapter = calendarAdapter
     }
 
     // 아코디언

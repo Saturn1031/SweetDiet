@@ -19,8 +19,10 @@ class AddMealActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         intent = intent
-        val checked = intent.getStringExtra("checked")!!
-        binding.txtMain.text = "${checked} 추가하기"
+        val checkedMeal = intent.getStringExtra("checkedMeal")!!
+        val selectedDate = intent.getStringExtra("selectedDate")!!
+
+        binding.txtMain.text = "${checkedMeal} 추가하기"
 
         searchFood = binding.edtFood.text.toString()
         binding.btnSearch.setOnClickListener {
@@ -40,7 +42,7 @@ class AddMealActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Log.d("mobileapp", "$response")
                         Log.d("mobileapp", "${response.body()}")
-                        binding.jsonRecyclerView.adapter = JsonAdapter(response.body()?.body!!.items)
+                        binding.jsonRecyclerView.adapter = JsonAdapter(response.body()?.body!!.items, checkedMeal, selectedDate, this@AddMealActivity)
                         binding.jsonRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
                     }
                 }

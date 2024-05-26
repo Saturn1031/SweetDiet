@@ -51,16 +51,14 @@
     <LinearLayout
         android:id="@+id/layout_expand"
         android:visibility="gone"
-        android:background="#F1F1F1"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ateFoodList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="test"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

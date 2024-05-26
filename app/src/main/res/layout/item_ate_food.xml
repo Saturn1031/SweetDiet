@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/box_shape"
     android:layout_width="match_parent"
     android:layout_height="88dp">
     <LinearLayout
@@ -13,30 +12,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp">
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="음식"
-            android:id="@+id/descKor"
+            android:id="@+id/ateDescKor"
             android:textSize="16dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="가공업체"
-            android:id="@+id/animalPlant"
+            android:id="@+id/ateAnimalPlant"
             android:textSize="12dp"
             android:layout_marginTop="8dp"/>
     </LinearLayout>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAddMeal"
-        android:layout_width="72dp"
-        android:layout_height="32dp"
-        android:text="추가하기"
-        android:textColor="@color/white"
-        android:background="@drawable/button_shape"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
             fragments = listOf(FragmentRecord(), FragmentAnalysis(), FragmentRecipe(), FragmentMore())
         }
 
+        fun getItem(position: Int): Fragment {
+            return fragments[position]
+        }
+
         // 프래그먼트 개수 반환
         override fun getItemCount(): Int {
             return fragments.size
@@ -50,5 +54,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }.attach()
 
+//        val pageCallBack = object: ViewPager2.OnPageChangeCallback() {
+//            override fun onPageSelected(position: Int) {
+//                when(position) {
+//                    1 -> {
+//                        Log.d("mobileapp", "1 fragment")
+//                        val fragment = (binding.viewpager.adapter as MyFragmentPagerAdapter).getItem(position) as FragmentAnalysis
+//                        fragment.onResume()
+//                    }
+//                }
+//            }
+//        }
+//        binding.viewpager.registerOnPageChangeCallback(pageCallBack)
     }
 }

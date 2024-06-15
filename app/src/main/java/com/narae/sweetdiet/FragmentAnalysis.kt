@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -13,7 +14,10 @@ import com.github.mikephil.charting.data.PieEntry
 import com.narae.sweetdiet.databinding.FragmentAnalysisBinding
 import java.io.BufferedReader
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Locale
 import kotlin.math.pow
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +33,10 @@ class FragmentAnalysis : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var binding: FragmentAnalysisBinding
+    lateinit var itemList: MutableList<FoodData>
+    lateinit var today: String
+    lateinit var mpPieChart: PieChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +51,53 @@ class FragmentAnalysis : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentAnalysisBinding.inflate(inflater, container, false)
+        binding = FragmentAnalysisBinding.inflate(inflater, container, false)
+        itemList = mutableListOf<FoodData>()
+        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+        today = dateFormat.format(System.currentTimeMillis())
+        MyApplication.db.collection("meals")
+            .whereEqualTo("date_time", today)
+            .get()
+            .addOnSuccessListener { result ->
+                if (result.isEmpty) {
+                    makePieChart(itemList)
+                }
+                for (document in result) {
+                    val item = document.toObject(FoodData::class.java)
+                    item.docId = document.id
+                    itemList.add(item)
+                    makePieChart(itemList)
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "서버 데이터 획득 실패", Toast.LENGTH_SHORT).show()
+            }
 
+        binding.refresh.setOnClickListener {
+            itemList.clear()
+            MyApplication.db.collection("meals")
+                .whereEqualTo("date_time", today)
+                .get()
+                .addOnSuccessListener { result ->
+                    if (result.isEmpty) {
+                        makePieChart(itemList)
+                    }
+                    for (document in result) {
+                        val item = document.toObject(FoodData::class.java)
+                        item.docId = document.id
+                        itemList.add(item)
+                        makePieChart(itemList)
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "서버 데이터 획득 실패", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        return binding.root
+    }
+
+    fun makePieChart(itemList: MutableList<FoodData>) {
         // 파일 읽기 (최초 실행 시에는 myBodyInfoFile.txt가 없으므로 주석처리 후 실행해야 함)
         val file = File(context?.filesDir, "myBodyInfoFile.txt")
         val readstream : BufferedReader = file.reader().buffered()
@@ -63,8 +116,15 @@ class FragmentAnalysis : Fragment() {
 
         // 열량 섭취량
         var intakeCalories = 0f
+        if (itemList.isEmpty()) {
+            intakeCalories = 0f
+        } else {
+            for (item in itemList) {
+                intakeCalories += item.calorie?.toFloat() ?: 0f
+            }
+        }
 
-        val mpPieChart: PieChart = binding.MPpieChart
+        mpPieChart = binding.MPpieChart
 
         // 그래프에 나타낼 데이터
         val entries = ArrayList<PieEntry>()
@@ -95,8 +155,6 @@ class FragmentAnalysis : Fragment() {
         mpPieChart.description.isEnabled = false
         // 그래프 업데이트
         mpPieChart.invalidate()
-
-        return binding.root
     }
 
     companion object {

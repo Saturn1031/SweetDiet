@@ -58,6 +58,17 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUserBodyInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@drawable/box_shape"
+        android:backgroundTint="@color/white"
+        android:text="나의 신체 정보 관리"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnUserProfile"
         android:layout_width="wrap_content"
         android:layout_height="48dp"

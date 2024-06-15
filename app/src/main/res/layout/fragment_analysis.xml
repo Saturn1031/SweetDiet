@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".FragmentAnalysis">
 
+    <LinearLayout
+        android:id="@+id/userInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/box_shape"
+        android:gravity="center"
+        android:layout_marginTop="24dp">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-</FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="오늘의 섭취 열량"
+                android:textSize="24sp" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/MPpieChart"
+                android:layout_width="320dp"
+                android:layout_height="320dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -50,6 +50,11 @@ class FragmentMore : Fragment() {
 
         binding.userEmail.text = MyApplication.email
 
+        binding.btnUserBodyInfo.setOnClickListener {
+            val intent = Intent(requireContext(), UserBodyInfoEditActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnUserProfile.setOnClickListener {
             val intent = Intent(requireContext(), UserProfileActivity::class.java)
             startActivity(intent)

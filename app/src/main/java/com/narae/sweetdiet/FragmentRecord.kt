@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -93,7 +92,6 @@ class FragmentRecord : Fragment() {
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
                 // 클릭 시 이벤트 작성
-                Toast.makeText(view?.context,"${dateList[position].date}일 클릭", Toast.LENGTH_SHORT).show()
 
                 val calendar = Calendar.getInstance()
                 val dateFormat = SimpleDateFormat("yyyyMM", Locale.getDefault())

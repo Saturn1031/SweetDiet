@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".UserBodyInfoEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserBodyInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserProfileActivity"
             android:exported="false" />
         <activity

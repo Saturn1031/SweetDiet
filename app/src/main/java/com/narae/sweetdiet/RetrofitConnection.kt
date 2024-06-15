@@ -1,26 +1,22 @@
 package com.narae.sweetdiet
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
-// http://apis.data.go.kr/1470000/FoodNtrIrdntInfoService/getFoodNtrItdntList?ServiceKey=n6EBRN24jG%2BUrUXH%2FsU8SlHMyu1RBlJZvoO5woqXnoa0poCpn%2BiLZX0D3RXUafvYhhFLUa%2FB%2Fr7n3ZJSWDGuuQ%3D%3D&desc_kor=초코&numOfRows=3&pageNo=1&type=json
+// http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/getFoodNtrItdntList1?ServiceKey=n6EBRN24jG%2BUrUXH%2FsU8SlHMyu1RBlJZvoO5woqXnoa0poCpn%2BiLZX0D3RXUafvYhhFLUa%2FB%2Fr7n3ZJSWDGuuQ%3D%3D&desc_kor=초코&numOfRows=3&pageNo=1&type=json
 
 class RetrofitConnection {
     companion object {
-        private const val BASE_URL = "http://apis.data.go.kr/1470000/FoodNtrIrdntInfoService/"
+        private const val BASE_URL = "http://apis.data.go.kr/1471000/FoodNtrIrdntInfoService1/"
 
         val jsonNetworkService: NetworkService
-
-        val gson : Gson = GsonBuilder()
-            .setLenient()
-            .create()
 
         val jsonRetrofit: Retrofit
             get() = Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
         init {

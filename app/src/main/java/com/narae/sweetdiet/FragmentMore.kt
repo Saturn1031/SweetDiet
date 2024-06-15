@@ -1,12 +1,18 @@
 package com.narae.sweetdiet
 
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
+import com.bumptech.glide.Glide
 import com.narae.sweetdiet.databinding.FragmentMoreBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -20,6 +26,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentMore : Fragment() {
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var binding: FragmentMoreBinding
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -37,7 +46,19 @@ class FragmentMore : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentMoreBinding.inflate(inflater, container, false)
+        binding = FragmentMoreBinding.inflate(inflater, container, false)
+
+        binding.userEmail.text = MyApplication.email
+
+        binding.btnUserProfile.setOnClickListener {
+            val intent = Intent(requireContext(), UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnSetting.setOnClickListener {
+            val intent = Intent(requireContext(), SettingsActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnLogout.setOnClickListener {
             MyApplication.auth.signOut()
@@ -51,6 +72,35 @@ class FragmentMore : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val userStr = sharedPreferences.getString("userName", "User")
+        binding.userName.text = userStr
+
+        val userProfile = sharedPreferences.getBoolean("userProfile", false)
+        // true 이면 사용자 사진 표시, false 이면 user_basic 표시
+        if (userProfile) {
+            val imageRef = MyApplication.storage.reference.child("images/${MyApplication.auth.currentUser?.email}.jpg")
+            imageRef.downloadUrl.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Glide.with(requireContext())
+                        .load(task.result)
+                        .into(binding.userImage)
+                }
+            }
+        } else {
+            binding.userImage.setImageResource(R.drawable.user_basic)
+        }
+
+        val color = sharedPreferences.getString("color", "#00000000")
+        binding.userInfo.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color))
+
+        val size = sharedPreferences.getString("size", "12.0f")
+        binding.userEmail.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size!!.toFloat())
     }
 
     companion object {

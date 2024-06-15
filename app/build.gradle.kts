@@ -48,6 +48,7 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.activity:activity:1.8.0")
+    implementation("androidx.preference:preference:1.2.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -72,6 +73,9 @@ dependencies {
     // firebase firestore
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
 
+    // firebase storage
+    implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
+
     // 구글 로그인
     implementation("com.google.android.gms:play-services-auth:21.1.1")
 
@@ -81,4 +85,7 @@ dependencies {
     // gson
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    // glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

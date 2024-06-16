@@ -21,24 +21,24 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal">
-    <EditText
-        android:id="@+id/edtFood"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:inputType="text"
-        android:layout_weight="1"
-        android:hint="음식 검색하기"/>
+        <EditText
+            android:id="@+id/edtFood"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:inputType="text"
+            android:layout_weight="1"
+            android:hint="음식 검색하기"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="64dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/button_shape"
-        android:text="검색"
-        android:textColor="@color/white"
-        android:id="@+id/btnSearch" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="64dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_shape"
+            android:text="검색"
+            android:textColor="@color/white"
+            android:id="@+id/btnSearch" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

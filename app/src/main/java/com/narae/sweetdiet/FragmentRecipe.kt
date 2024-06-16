@@ -1,11 +1,17 @@
 package com.narae.sweetdiet
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.narae.sweetdiet.databinding.FragmentRecipeBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +42,41 @@ class FragmentRecipe : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding = FragmentRecipeBinding.inflate(inflater, container, false)
+
+        var searchRecipe = binding.edtRecipe.text.toString()
+        binding.btnSearch.setOnClickListener {
+            searchRecipe = binding.edtRecipe.text.toString()
+
+            // https://apis.data.go.kr/1390802/AgriFood/FdFoodCkryImage/getKoreanFoodFdFoodCkryImageList?serviceKey=n6EBRN24jG%2BUrUXH%2FsU8SlHMyu1RBlJZvoO5woqXnoa0poCpn%2BiLZX0D3RXUafvYhhFLUa%2FB%2Fr7n3ZJSWDGuuQ%3D%3D&service_Type=json&Page_No=1&Page_Size=20&food_Name=%EB%B0%A5&ckry_Name=%EC%A1%B0%EB%A6%AC
+            val call: Call<String> = RetrofitConnection.recipeNetworkService.getJsonListRecipe(
+                "n6EBRN24jG+UrUXH/sU8SlHMyu1RBlJZvoO5woqXnoa0poCpn+iLZX0D3RXUafvYhhFLUa/B/r7n3ZJSWDGuuQ==",
+                "json",
+                1,
+                20,
+                searchRecipe,
+                "조리"
+            )
+
+            call?.enqueue(object: Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful) {
+                        Log.d("mobileapp", "$response")
+                        Log.d("mobileapp", "${response.body()}")
+
+                        val newBody = response.body()?.replace(", \"food_List\"", "\"food_List\"")
+
+                        val responseJson = Gson().fromJson(newBody, JsonResponseRecipe::class.java)
+
+                        binding.jsonRecyclerView.adapter = JsonAdapterRecipe(responseJson.response.list)
+                        binding.jsonRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
+                    }
+                }
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("mobileapp", "onFailure")
+                    Log.d("mobileapp", "$t")
+                }
+            })
+        }
 
         return binding.root
     }

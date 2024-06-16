@@ -19,3 +19,23 @@ data class myJsonBody(
 data class JsonResponse(
     val body: myJsonBody
 )
+
+// Recipe
+data class myJsonFoodsRecipe (
+    val food_Nm: String,
+    val food_Image_Address: String
+)
+
+data class myJsonItemsRecipe (
+    val fd_Nm: String,
+    val ckry_Sumry_Info: String,
+    val food_List: MutableList<myJsonFoodsRecipe>
+)
+
+data class myJsonResponseRecipe (
+    val list: MutableList<myJsonItemsRecipe>
+)
+
+data class JsonResponseRecipe(
+    val response: myJsonResponseRecipe
+)

@@ -15,4 +15,14 @@ interface NetworkService {
         @Query("pageNo") pageNo: Int,
         @Query("type") type: String,
     ): Call<String>
+
+    @GET("getKoreanFoodFdFoodCkryImageList")
+    fun getJsonListRecipe(
+        @Query("serviceKey") serviceKey: String,
+        @Query("service_Type") service_Type: String,
+        @Query("Page_No") Page_No: Int,
+        @Query("Page_Size") Page_Size: Int,
+        @Query("food_Name") food_Name: String,
+        @Query("ckry_Name") ckry_Name: String,
+    ): Call<String>
 }

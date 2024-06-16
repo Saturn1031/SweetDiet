@@ -67,7 +67,7 @@ class FragmentRecipe : Fragment() {
 
                         val responseJson = Gson().fromJson(newBody, JsonResponseRecipe::class.java)
 
-                        binding.jsonRecyclerView.adapter = JsonAdapterRecipe(responseJson.response.list)
+                        binding.jsonRecyclerView.adapter = JsonAdapterRecipe(binding.root.context, responseJson.response.list)
                         binding.jsonRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
                     }
                 }

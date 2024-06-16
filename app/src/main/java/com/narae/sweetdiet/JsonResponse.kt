@@ -1,5 +1,7 @@
 package com.narae.sweetdiet
 
+import java.io.Serializable
+
 data class myJsonItems(
     val DESC_KOR: String,
     val NUTR_CONT1: String,
@@ -24,13 +26,13 @@ data class JsonResponse(
 data class myJsonFoodsRecipe (
     val food_Nm: String,
     val food_Image_Address: String
-)
+): Serializable
 
 data class myJsonItemsRecipe (
     val fd_Nm: String,
     val ckry_Sumry_Info: String,
     val food_List: MutableList<myJsonFoodsRecipe>
-)
+): Serializable
 
 data class myJsonResponseRecipe (
     val list: MutableList<myJsonItemsRecipe>

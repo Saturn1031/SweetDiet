@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.narae.sweetdiet.databinding.ItemAccordionBinding
@@ -80,9 +79,10 @@ class ExpandableAdapter(
 
             Log.d("mobileapp", "${selectedDate}")
             Log.d("mobileapp", "${mealList[position].name}")
-            if (MyApplication.checkAuth()) {
+            if (MyApplication.checkAuth() || MyApplication.email != null) {
                 MyApplication.db.collection("meals")
 //                    .orderBy("date_time", Query.Direction.DESCENDING)
+                    .whereEqualTo("email", MyApplication.email)
                     .whereEqualTo("checked_meal", mealList[position].name)
                     .whereEqualTo("date_time", selectedDate)
                     .get()
@@ -97,7 +97,7 @@ class ExpandableAdapter(
                         holder.binding.ateFoodList.adapter = AteFoodAdapter(holder.binding.root.context, itemList)
                     }
                     .addOnFailureListener {
-                        Toast.makeText(fragmentRecord.requireContext(), "서버 데이터 획득 실패", Toast.LENGTH_SHORT).show()
+                        Log.d("mobileapp", "서버 데이터 획득 실패")
                     }
             }
         }

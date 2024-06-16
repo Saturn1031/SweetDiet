@@ -11,6 +11,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.narae.sweetdiet.databinding.ActivityLoginBinding
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
+import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
+
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -28,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
                     binding.email.text.clear()
                     binding.password.text.clear()
                     if(task.isSuccessful){
-                        if(MyApplication.checkAuth()){
+                        if(MyApplication.checkAuth() || MyApplication.email != null){
                             MyApplication.email = email
                             Log.d("mobileapp", "로그인 성공")
                             val intent = Intent(this, MainActivity::class.java)
@@ -89,6 +95,29 @@ class LoginActivity : AppCompatActivity() {
                 .build()
             val signInIntent = GoogleSignIn.getClient(this,gso).signInIntent
             requestLauncher.launch(signInIntent)
+        }
+
+        binding.btnNaverLogin.setOnClickListener {
+            val oAuthLginCallback = object : OAuthLoginCallback {
+                override fun onSuccess() {
+                    NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
+                        override fun onSuccess(result: NidProfileResponse) {
+                            MyApplication.email = result.profile?.email.toString()
+                            Toast.makeText(baseContext,"네이버 로그인 성공", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        override fun onError(errorCode: Int, message: String) { }
+                        override fun onFailure(httpStatus: Int, message: String) { }
+                    })
+                }
+                override fun onFailure(errorCode: Int, message: String) { }
+                override fun onError(errorCode: Int, message: String) { }
+            }
+
+            NaverIdLoginSDK.initialize(this, BuildConfig.NAVER_CLIENT_ID, BuildConfig.NAVER_CLIENT_SECRET, "sweetdiet")
+            NaverIdLoginSDK.authenticate(this, oAuthLginCallback)
         }
     }
 }

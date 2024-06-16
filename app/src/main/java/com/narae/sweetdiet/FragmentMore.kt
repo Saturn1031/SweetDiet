@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.narae.sweetdiet.databinding.FragmentMoreBinding
+import com.navercorp.nid.NaverIdLoginSDK
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,8 +68,12 @@ class FragmentMore : Fragment() {
 
         binding.btnLogout.setOnClickListener {
             MyApplication.auth.signOut()
+            Log.d("mobileapp", "로그아웃")
+            if (NaverIdLoginSDK.getAccessToken() != null) {
+                Log.d("mobileapp", "네이버 로그아웃")
+                NaverIdLoginSDK.logout()
+            }
             MyApplication.email = null
-            Log.d("mobileapp", "로그 아웃")
 
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)

@@ -1,3 +1,7 @@
+
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -10,6 +14,9 @@ android {
     namespace = "com.narae.sweetdiet"
     compileSdk = 34
 
+    val properties = Properties()
+    properties.load(FileInputStream(rootProject.file("local.properties")))
+
     defaultConfig {
         applicationId = "com.narae.sweetdiet"
         minSdk = 24
@@ -18,6 +25,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "NAVER_CLIENT_ID", properties.getProperty("naver_client_id"))
+        buildConfigField("String", "NAVER_CLIENT_SECRET", properties.getProperty("naver_client_secret"))
     }
 
     buildTypes {
@@ -38,6 +47,9 @@ android {
     }
     viewBinding {
         enable = true
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -78,6 +90,10 @@ dependencies {
 
     // 구글 로그인
     implementation("com.google.android.gms:play-services-auth:21.1.1")
+
+    // 네이버 로그인
+    implementation("com.navercorp.nid:oauth:5.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 
     // retrofit2 사용 등록
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

@@ -47,12 +47,12 @@ class JsonAdapter(val datas:MutableList<myJsonItems>?, val checkedMeal: String, 
                 .add(data)
                 .addOnSuccessListener {
                     Log.d("mobileapp", "데이터 저장 성공")
-                    Toast.makeText(holder.itemView.context, "데이터 저장 성공", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(holder.itemView.context, "식사 저장 성공", Toast.LENGTH_SHORT).show()
                     addMealActivity.finish()
                 }
                 .addOnFailureListener {
                     Log.d("mobileapp", "데이터 저장 실패")
-                    Toast.makeText(holder.itemView.context, "데이터 저장 실패", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(holder.itemView.context, "식사 저장 실패", Toast.LENGTH_SHORT).show()
                 }
         }
     }

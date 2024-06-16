@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.charts.PieChart
@@ -59,6 +58,7 @@ class FragmentAnalysis : Fragment() {
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
         today = dateFormat.format(System.currentTimeMillis())
         MyApplication.db.collection("meals")
+            .whereEqualTo("email", MyApplication.email)
             .whereEqualTo("date_time", today)
             .get()
             .addOnSuccessListener { result ->
@@ -71,12 +71,13 @@ class FragmentAnalysis : Fragment() {
                 makeBarChart(itemList)
             }
             .addOnFailureListener {
-                Toast.makeText(context, "서버 데이터 획득 실패", Toast.LENGTH_SHORT).show()
+                Log.d("mobileapp", "서버 데이터 획득 실패")
             }
 
         binding.refresh.setOnClickListener {
             itemList.clear()
             MyApplication.db.collection("meals")
+                .whereEqualTo("email", MyApplication.email)
                 .whereEqualTo("date_time", today)
                 .get()
                 .addOnSuccessListener { result ->
@@ -89,7 +90,7 @@ class FragmentAnalysis : Fragment() {
                     makeBarChart(itemList)
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "서버 데이터 획득 실패", Toast.LENGTH_SHORT).show()
+                    Log.d("mobileapp", "서버 데이터 획득 실패")
                 }
         }
 

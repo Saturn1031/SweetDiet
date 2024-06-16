@@ -13,7 +13,7 @@ class SplashActivity : AppCompatActivity() {
 
         // 일정 시간 지연 이후 실행하기 위한 코드
         Handler(Looper.getMainLooper()).postDelayed({
-            if (MyApplication.checkAuth()) {
+            if (MyApplication.checkAuth() || MyApplication.email != null) {
                 // 로그인 상태이면 MainActivity로 이동
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

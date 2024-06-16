@@ -85,8 +85,8 @@
             android:clickable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:src="@drawable/google_logo"/>
@@ -94,21 +94,21 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btnKakaoLogin"
+            android:id="@+id/btnNaverLogin"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginLeft="40dp"
             android:orientation="horizontal"
-            android:background="@drawable/kakaolayout_shape"
+            android:background="@drawable/layout_shape"
             android:gravity="center"
             android:clickable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
-                android:src="@drawable/kakao_logo"/>
+                android:src="@drawable/naver_logo"/>
 
         </LinearLayout>
 

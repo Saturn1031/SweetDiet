@@ -53,18 +53,5 @@ class MainActivity : AppCompatActivity() {
                 3 -> tab.text = "더보기"
                 }
             }.attach()
-
-//        val pageCallBack = object: ViewPager2.OnPageChangeCallback() {
-//            override fun onPageSelected(position: Int) {
-//                when(position) {
-//                    1 -> {
-//                        Log.d("mobileapp", "1 fragment")
-//                        val fragment = (binding.viewpager.adapter as MyFragmentPagerAdapter).getItem(position) as FragmentAnalysis
-//                        fragment.onResume()
-//                    }
-//                }
-//            }
-//        }
-//        binding.viewpager.registerOnPageChangeCallback(pageCallBack)
     }
 }

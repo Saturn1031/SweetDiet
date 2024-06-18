@@ -12,7 +12,12 @@
             app:key="userProfile"
             app:title="프로필 사진 표시"
             app:defaultValue="false"
-            app:enabled="false"/>
+            app:enabled="false" />
+
+        <SwitchPreferenceCompat
+            app:key="pushNotification"
+            app:title="푸시 알림 허용"
+            app:defaultValue="false" />
 
     </PreferenceCategory>
 

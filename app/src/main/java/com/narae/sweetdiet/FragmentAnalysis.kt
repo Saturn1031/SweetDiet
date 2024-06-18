@@ -1,5 +1,6 @@
 package com.narae.sweetdiet
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -35,6 +36,7 @@ class FragmentAnalysis : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var binding: FragmentAnalysisBinding
+    lateinit var mContext: Context
     lateinit var itemList: MutableList<FoodData>
     lateinit var today: String
     lateinit var mpPieChart: PieChart
@@ -97,14 +99,28 @@ class FragmentAnalysis : Fragment() {
         return binding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
+
     fun makePieChart(itemList: MutableList<FoodData>) {
-        // 파일 읽기 (최초 실행 시에는 myBodyInfoFile.txt가 없으므로 주석처리 후 실행해야 함)
-        val file = File(context?.filesDir, "myBodyInfoFile.txt")
-        val readstream : BufferedReader = file.reader().buffered()
-        val bodyInfo = readstream.readLine()
-        val height = bodyInfo.split("_")[0]
-        val weight = bodyInfo.split("_")[1]
-        val gender = bodyInfo.split("_")[2]
+        var height: String
+        var weight: String
+        var gender: String
+
+        val file = File(mContext.filesDir, "myBodyInfoFile.txt")
+        if (file.exists() == true) {
+            val readstream: BufferedReader = file.reader().buffered()
+            val bodyInfo = readstream.readLine()
+            height = bodyInfo.split("_")[0]
+            weight = bodyInfo.split("_")[1]
+            gender = bodyInfo.split("_")[2]
+        } else {
+            height = "0"
+            weight = "0"
+            gender = "0"
+        }
 
         // 열량 권장 섭취량
         var recommendCalories = 0f
@@ -136,7 +152,7 @@ class FragmentAnalysis : Fragment() {
 
         // 그래프 색상(데이터 순서)
         val colors = listOf(
-            getResources().getColor(R.color.green, null),
+            mContext.getResources().getColor(R.color.green, null),
             Color.parseColor("#D2D1D4")
         )
 
@@ -161,13 +177,23 @@ class FragmentAnalysis : Fragment() {
     }
 
     fun makeBarChart(itemList: MutableList<FoodData>) {
-        // 파일 읽기 (최초 실행 시에는 myBodyInfoFile.txt가 없으므로 주석처리 후 실행해야 함)
-        val file = File(context?.filesDir, "myBodyInfoFile.txt")
-        val readstream : BufferedReader = file.reader().buffered()
-        val bodyInfo = readstream.readLine()
-        val height = bodyInfo.split("_")[0]
-        val weight = bodyInfo.split("_")[1]
-        val gender = bodyInfo.split("_")[2]
+        var height: String
+        var weight: String
+        var gender: String
+
+        val file = File(mContext.filesDir, "myBodyInfoFile.txt")
+        if (file.exists() == true) {
+            val readstream: BufferedReader = file.reader().buffered()
+            val bodyInfo = readstream.readLine()
+            height = bodyInfo.split("_")[0]
+            weight = bodyInfo.split("_")[1]
+            gender = bodyInfo.split("_")[2]
+        } else {
+            height = "0"
+            weight = "0"
+            gender = "0"
+        }
+
         // 열량 권장 섭취량
         var recommendCalories = 0f
         if (gender.equals("남자")) {

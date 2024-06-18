@@ -27,6 +27,7 @@ import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.narae.sweetdiet.databinding.FragmentMoreBinding
 import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLoginState
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -117,7 +118,8 @@ class FragmentMore : Fragment() {
         binding.btnLogout.setOnClickListener {
             MyApplication.auth.signOut()
             Log.d("mobileapp", "로그아웃")
-            if (NaverIdLoginSDK.getAccessToken() != null) {
+            NaverIdLoginSDK.initialize(requireContext(), BuildConfig.NAVER_CLIENT_ID, BuildConfig.NAVER_CLIENT_SECRET, "sweetdiet")
+            if (NaverIdLoginSDK.getState() == NidOAuthLoginState.OK) {
                 Log.d("mobileapp", "네이버 로그아웃")
                 NaverIdLoginSDK.logout()
             }

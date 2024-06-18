@@ -32,7 +32,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:defaultValue="12.0f"
+            app:defaultValue="16.0f"
             app:entries="@array/size_entries"
             app:entryValues="@array/size_values"
             app:key="size"
@@ -40,5 +40,4 @@
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
-
 </PreferenceScreen>

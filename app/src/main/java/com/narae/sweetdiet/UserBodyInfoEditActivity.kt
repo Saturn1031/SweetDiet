@@ -28,11 +28,19 @@ class UserBodyInfoEditActivity : AppCompatActivity() {
         } else {
             height = "0"
             weight = "0"
-            gender = "0"
+            gender = "미설정"
         }
 
-        binding.txtHeight.setText("키: " + height)
-        binding.txtWeight.setText("체중: " + weight)
+        if (height == "0") {
+            binding.txtHeight.setText("키: " + "미설정")
+        } else {
+            binding.txtHeight.setText("키: " + height)
+        }
+        if (weight == "0") {
+            binding.txtWeight.setText("체중: " + "미설정")
+        } else {
+            binding.txtWeight.setText("체중: " + weight)
+        }
         binding.txtGender.setText("성별: " + gender)
 
         binding.btnSave.setOnClickListener {

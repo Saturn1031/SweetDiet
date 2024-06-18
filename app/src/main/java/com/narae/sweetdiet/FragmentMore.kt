@@ -60,7 +60,6 @@ class FragmentMore : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentMoreBinding.inflate(inflater, container, false)
 
         binding.userEmail.text = MyApplication.email
@@ -127,7 +126,6 @@ class FragmentMore : Fragment() {
 
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
-            // 현재 액티비티 종료
             requireActivity().finish()
         }
 
@@ -162,7 +160,7 @@ class FragmentMore : Fragment() {
         val color = sharedPreferences.getString("color", "#FFF2E3DB")
         binding.userInfo.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color))
 
-        val size = sharedPreferences.getString("size", "12.0f")
+        val size = sharedPreferences.getString("size", "16.0f")
         binding.userEmail.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size!!.toFloat())
     }
 

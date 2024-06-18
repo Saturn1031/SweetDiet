@@ -21,16 +21,6 @@
         android:adjustViewBounds="true"
         android:src="@drawable/logo2" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/username"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        android:hint="User Name"-->
-<!--        android:textSize="14sp"-->
-<!--        android:inputType="textEmailAddress"-->
-<!--        android:background="@drawable/edittext_shape"/>-->
-
     <EditText
         android:id="@+id/email"
         android:layout_width="wrap_content"
@@ -60,8 +50,7 @@
         android:backgroundTint="@color/orange"
         android:text="Sign Up"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 
     <View
         android:layout_width="327dp"

@@ -43,7 +43,6 @@ class CalendarAdapter(private val dataSet: ArrayList<Date>): RecyclerView.Adapte
         }
 
         holder.binding.root.setOnClickListener {
-            // 클릭 이벤트 처리
             // 클릭한 아이템의 위치 추적
             val previousSelectedPosition = selectedPosition
             selectedPosition = holder.adapterPosition
@@ -56,15 +55,15 @@ class CalendarAdapter(private val dataSet: ArrayList<Date>): RecyclerView.Adapte
         }
     }
 
-    // (2) 리스너 인터페이스
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)
     }
-    // (3) 외부에서 클릭 시 이벤트 설정
+
+    // 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
         this.itemClickListener = onItemClickListener
     }
-    // (4) setItemClickListener로 설정한 함수 실행
+
     private lateinit var itemClickListener : OnItemClickListener
 
     override fun getItemCount() = dataSet.size

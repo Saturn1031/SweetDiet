@@ -50,8 +50,7 @@
         android:backgroundTint="@color/orange"
         android:text="Login"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 
     <View
         android:layout_width="327dp"
@@ -111,8 +110,5 @@
                 android:src="@drawable/naver_logo"/>
 
         </LinearLayout>
-
     </LinearLayout>
-
-
 </LinearLayout>

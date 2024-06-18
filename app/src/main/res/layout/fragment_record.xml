@@ -12,14 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-<!--        <Button-->
-<!--            android:id="@+id/today_btn"-->
-<!--            android:layout_width="120dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="#00FFFFFF"-->
-<!--            android:text="TODAY"-->
-<!--            android:textColor="#BDC0BA" />-->
-
         <TextView
             android:id="@+id/month_year_tv"
             android:layout_width="wrap_content"
@@ -30,25 +22,18 @@
             android:textColor="#000000"
             android:textSize="16sp" />
 
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/add_btn"-->
-<!--            android:layout_width="120dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@drawable/button_shape"-->
-<!--            android:text="식사 추가"-->
-<!--            android:textColor="@color/white" />-->
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendar_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"/>
+        android:overScrollMode="never" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FFD9D9DE"/>
+        android:background="#FFD9D9DE" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_list"
@@ -69,6 +54,6 @@
             android:textColor="@color/white"
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_shape" />
-    </RelativeLayout>
 
+    </RelativeLayout>
 </LinearLayout>

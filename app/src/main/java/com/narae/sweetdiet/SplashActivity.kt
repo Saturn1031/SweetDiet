@@ -11,7 +11,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // 일정 시간 지연 이후 실행하기 위한 코드
         Handler(Looper.getMainLooper()).postDelayed({
             if (MyApplication.checkAuth() || MyApplication.email != null) {
                 // 로그인 상태이면 MainActivity로 이동
@@ -24,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-        }, 2000) // 시간 2초 이후 실행
+        }, 2000) // 2초 이후 실행
 
     }
 }

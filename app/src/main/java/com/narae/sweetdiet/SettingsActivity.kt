@@ -26,7 +26,7 @@ class SettingsActivity : AppCompatActivity() {
 
             val userImgToggle: SwitchPreferenceCompat? = findPreference("userProfile")
 
-            // 사용자 프로필사진 있으면 토글 enable
+            // 사용자 프로필 사진 있으면 토글 enable
             val imageRef = MyApplication.storage.reference.child("images/${auth.currentUser?.email}.jpg")
             imageRef.metadata.addOnSuccessListener {
                 userImgToggle?.isEnabled = true

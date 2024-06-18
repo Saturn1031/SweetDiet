@@ -21,11 +21,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal">
+
         <EditText
             android:id="@+id/edtFood"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:background="@drawable/edittext_shape"
             android:inputType="text"
             android:layout_weight="1"
             android:hint="음식 검색하기"/>
@@ -39,10 +41,12 @@
             android:text="검색"
             android:textColor="@color/white"
             android:id="@+id/btnSearch" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/jsonRecyclerView" />
+
 </LinearLayout>

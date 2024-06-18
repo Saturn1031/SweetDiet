@@ -8,7 +8,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
-// Dex: Dalvic Executable (64k)
 class MyApplication: MultiDexApplication() {
     companion object {
         lateinit var auth: FirebaseAuth

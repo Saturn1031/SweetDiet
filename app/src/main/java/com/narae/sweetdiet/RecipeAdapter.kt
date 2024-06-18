@@ -22,7 +22,7 @@ class RecipeAdapter (val datas:MutableList<myJsonFoodsRecipe>): RecyclerView.Ada
         val binding = (holder as RecipeViewHolder).binding
         val model = datas!![position]
 
-        Log.d("mobileapp", "model.food_Nm : ${model.food_Nm}")
+        Log.d("mobileapp", "model.food_Nm: ${model.food_Nm}")
 
         binding.txtFood.text = model.food_Nm
         if (model.food_Image_Address.equals("")) {

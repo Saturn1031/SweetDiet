@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -40,7 +39,6 @@ class FragmentAnalysis : Fragment() {
     lateinit var itemList: MutableList<FoodData>
     lateinit var today: String
     lateinit var mpPieChart: PieChart
-    lateinit var barChart: HorizontalBarChart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +52,6 @@ class FragmentAnalysis : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentAnalysisBinding.inflate(inflater, container, false)
         itemList = mutableListOf<FoodData>()
         val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
@@ -119,7 +116,7 @@ class FragmentAnalysis : Fragment() {
         } else {
             height = "0"
             weight = "0"
-            gender = "0"
+            gender = "미설정"
         }
 
         // 열량 권장 섭취량
@@ -150,13 +147,13 @@ class FragmentAnalysis : Fragment() {
         entries.add(PieEntry(intakeCalories, "현재 섭취량"))
         entries.add(PieEntry(recommendCalories - intakeCalories, "남은 섭취량"))
 
-        // 그래프 색상(데이터 순서)
+        // 그래프 색상 (데이터 순서)
         val colors = listOf(
             mContext.getResources().getColor(R.color.green, null),
             Color.parseColor("#D2D1D4")
         )
 
-        // 데이터, 색상, 글자크기 및 색상 설정
+        // 데이터, 색상, 글자 크기 및 색상 설정
         val dataSet = PieDataSet(entries, "")
         dataSet.colors = colors
         dataSet.valueTextSize = 12F
@@ -191,7 +188,7 @@ class FragmentAnalysis : Fragment() {
         } else {
             height = "0"
             weight = "0"
-            gender = "0"
+            gender = "미설정"
         }
 
         // 열량 권장 섭취량

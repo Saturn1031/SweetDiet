@@ -36,9 +36,6 @@ class JsonAdapterRecipe(val context: Context, val datas:MutableList<myJsonItemsR
 
         binding.root.setOnClickListener {
             val intent = Intent(context, RecipeActivity::class.java)
-//            intent.putExtra("recipeName", model.fd_Nm)
-//            intent.putExtra("recipe", model.ckry_Sumry_Info)
-//            intent.putExtra("foodList", model.food_List)
             val bundle = Bundle()
             bundle.putSerializable("recipe", model)
             intent.putExtras(bundle)

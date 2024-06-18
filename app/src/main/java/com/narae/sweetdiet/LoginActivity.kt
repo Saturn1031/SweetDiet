@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnLogin.setOnClickListener {   // 로그인 Button
+        binding.btnLogin.setOnClickListener {
             val email = binding.email.text.toString()
             val password = binding.password.text.toString()
             MyApplication.auth.signInWithEmailAndPassword(email,password)
@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
                     if(task.isSuccessful){
                         if(MyApplication.checkAuth() || MyApplication.email != null){
                             MyApplication.email = email
-                            Log.d("mobileapp", "로그인 성공")
+                            Log.d("mobileapp", "이메일 로그인 성공")
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     else{
-                        Toast.makeText(baseContext,"로그인 실패", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext,"이메일 로그인 실패", Toast.LENGTH_SHORT).show()
                         Log.d("mobileapp", "로그인 실패")
                     }
                 }
@@ -61,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
         val requestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
             Log.d("mobileapp","account1 : ${task.toString()}")
-            //Log.d("mobileapp","account2 : ${task.result}")
             try{
                 val account = task.getResult(ApiException::class.java)
                 val crendential = GoogleAuthProvider.getCredential(account.idToken, null)
@@ -80,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d("mobileapp", "구글 로그인 실패")
                         }
                     }
-            }catch (e: ApiException){ // APIException은 이미 지정된 exception말고 custom한 exception을 만들어서 쓰고 싶을때 사용
+            }catch (e: ApiException){
                 Toast.makeText(baseContext,"구글 로그인 Exception : ${e.printStackTrace()},${e.statusCode}",
                     Toast.LENGTH_SHORT).show()
                 Log.d("mobileapp", "구글 로그인 Exception : ${e.message}, ${e.statusCode}")
@@ -98,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnNaverLogin.setOnClickListener {
-            val oAuthLginCallback = object : OAuthLoginCallback {
+            val oAuthLoginCallback = object : OAuthLoginCallback {
                 override fun onSuccess() {
                     NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
                         override fun onSuccess(result: NidProfileResponse) {
@@ -117,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             NaverIdLoginSDK.initialize(this, BuildConfig.NAVER_CLIENT_ID, BuildConfig.NAVER_CLIENT_SECRET, "sweetdiet")
-            NaverIdLoginSDK.authenticate(this, oAuthLginCallback)
+            NaverIdLoginSDK.authenticate(this, oAuthLoginCallback)
         }
     }
 }

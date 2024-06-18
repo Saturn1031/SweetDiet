@@ -64,20 +64,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="키: "
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="number"/>
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="cm"/>
+            android:text="cm" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -90,20 +91,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="체중: "
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/editWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="number"/>
+            android:inputType="number" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="kg"/>
+            android:text="kg" />
 
     </LinearLayout>
 
@@ -119,7 +120,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:text="성별: "
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <RadioGroup
             android:id="@+id/rgGender"
@@ -132,14 +133,14 @@
                 android:id="@+id/rbMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="남자"/>
+                android:text="남자" />
 
             <RadioButton
                 android:id="@+id/rbFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
-                android:text="여자"/>
+                android:text="여자" />
 
         </RadioGroup>
 
@@ -161,7 +162,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="64dp"/>
+            android:layout_marginBottom="64dp" />
 
     </LinearLayout>
 </LinearLayout>

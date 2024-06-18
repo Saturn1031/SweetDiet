@@ -60,7 +60,6 @@ class FragmentRecord : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentRecordBinding.inflate(inflater, container, false)
 
         val calendar = Calendar.getInstance()
@@ -72,7 +71,7 @@ class FragmentRecord : Fragment() {
         calendarList = binding.calendarList
         mLayoutManager = LinearLayoutManager(context)
 
-        // recyclerView orientation (가로 방향 스크롤 설정)
+        // recyclerView orientation (달력 가로 방향 스크롤 설정)
         mLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         calendarList.layoutManager = mLayoutManager
 
@@ -91,8 +90,6 @@ class FragmentRecord : Fragment() {
 
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
-                // 클릭 시 이벤트 작성
-
                 val calendar = Calendar.getInstance()
                 val dateFormat = SimpleDateFormat("yyyyMM", Locale.getDefault())
                 selectedDate = dateFormat.format(calendar.time) + dateList[position].date
@@ -103,7 +100,6 @@ class FragmentRecord : Fragment() {
 
         // 식사 추가하기
         val items = arrayOf<String>("아침", "점심", "저녁", "간식")
-        // 선택된 아이템의 인덱스를 저장할 변수
         var selected = 0
 
         val eventHandler = object : DialogInterface.OnClickListener {
@@ -133,8 +129,8 @@ class FragmentRecord : Fragment() {
             // 하나만 선택 가능한 알림창 만들기
             AlertDialog.Builder(context).run() {
                 setTitle("식사 종류 선택")
-//                setIcon(android.R.drawable.ic_dialog_alert)
 
+                selected = 0
                 // setSingleChoiceItems: 선택될 아이템들 설정 (아이템 배열, 기본 체크될 인덱스, 아이템 클릭 리스너)
                 setSingleChoiceItems(items,0, object : DialogInterface.OnClickListener {
                     override fun onClick(dialog: DialogInterface?, which: Int) {
@@ -150,9 +146,8 @@ class FragmentRecord : Fragment() {
         return binding.root
     }
 
-    // list(날짜, 요일)를 만들고, adapter를 등록하는 메소드
+    // list(날짜, 요일)를 만들고, adapter를 등록하는 함수
     private fun setListView() {
-        // 현재 달의 마지막 날짜
         val cal = Calendar.getInstance()
         val year = cal.get(Calendar.YEAR)
         val month = cal.get(Calendar.MONTH)
@@ -161,7 +156,6 @@ class FragmentRecord : Fragment() {
 
         for(i: Int in 1..lastDayOfMonth) {
             cal.set(year, month, i)
-            val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
 
             val dayOfWeekString = SimpleDateFormat("EEE", Locale.KOREA).format(cal.time)
             dateList.add(Date(dayOfWeekString, i.toString()))

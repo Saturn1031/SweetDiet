@@ -2,6 +2,7 @@ package com.narae.sweetdiet
 
 import java.io.Serializable
 
+// Food
 data class myJsonItems(
     val DESC_KOR: String,
     val NUTR_CONT1: String,

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="88dp"
     android:gravity="center_vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +20,7 @@
             android:layout_marginLeft="16dp"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,13 +33,16 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="재료"
                 android:id="@+id/txtFood"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
+
         </LinearLayout>
+
     </LinearLayout>
 
     <View
@@ -46,5 +50,6 @@
         android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="#FFD9D9DE"/>
+        android:background="#FFD9D9DE" />
+
 </LinearLayout>

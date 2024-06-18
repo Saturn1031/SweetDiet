@@ -25,7 +25,7 @@ class JsonAdapter(val datas:MutableList<myJsonItems>?, val checkedMeal: String, 
         binding.animalPlant.text = model.ANIMAL_PLANT
 
         binding.btnAddMeal.setOnClickListener {
-            // 로그인 이메일, 식품이름, 열량 (kcal), 탄수화물 (g), 단백질 (g), 지방 (g), 당류 (g), 나트륨 (mg), 콜레스테롤 (mg), 포화지방산 (g), 트랜스지방산 (g) 입력 시간
+            // 로그인 이메일, 식품 이름, 열량 (kcal), 탄수화물 (g), 단백질 (g), 지방 (g), 당류 (g), 나트륨 (mg), 콜레스테롤 (mg), 포화지방산 (g), 트랜스지방산 (g), 입력 시간
             // 아침, 점심, 저녁, 간식
             val data = mapOf(
                 "email" to MyApplication.email,

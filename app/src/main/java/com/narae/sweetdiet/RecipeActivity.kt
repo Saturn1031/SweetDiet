@@ -20,6 +20,6 @@ class RecipeActivity : AppCompatActivity() {
         binding.txtRecipe.text = recipe.ckry_Sumry_Info
         binding.foodRecyclerView.adapter = RecipeAdapter(recipe.food_List)
         binding.foodRecyclerView.layoutManager = LinearLayoutManager(this)
-        Log.d("mobileapp", "food_List : ${recipe.food_List}")
+        Log.d("mobileapp", "food_List: ${recipe.food_List}")
     }
 }

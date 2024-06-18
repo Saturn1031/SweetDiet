@@ -52,7 +52,7 @@ class AddMealActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("mobileapp", "onFailure")
+                    Log.d("mobileapp", "공공 데이터 획득 실패")
                     Log.d("mobileapp", "$t")
                 }
             })

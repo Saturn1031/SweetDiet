@@ -1,5 +1,4 @@
 <resources>
-    <!-- Reply Preference -->
     <string-array name="color_entries">
         <item>oatmeal</item>
         <item>green</item>

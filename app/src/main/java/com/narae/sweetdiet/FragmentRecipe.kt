@@ -40,12 +40,10 @@ class FragmentRecipe : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val binding = FragmentRecipeBinding.inflate(inflater, container, false)
 
-        var searchRecipe = binding.edtRecipe.text.toString()
         binding.btnSearch.setOnClickListener {
-            searchRecipe = binding.edtRecipe.text.toString()
+            val searchRecipe = binding.edtRecipe.text.toString()
 
             // https://apis.data.go.kr/1390802/AgriFood/FdFoodCkryImage/getKoreanFoodFdFoodCkryImageList?serviceKey=n6EBRN24jG%2BUrUXH%2FsU8SlHMyu1RBlJZvoO5woqXnoa0poCpn%2BiLZX0D3RXUafvYhhFLUa%2FB%2Fr7n3ZJSWDGuuQ%3D%3D&service_Type=json&Page_No=1&Page_Size=20&food_Name=%EB%B0%A5&ckry_Name=%EC%A1%B0%EB%A6%AC
             val call: Call<String> = RetrofitConnection.recipeNetworkService.getJsonListRecipe(
@@ -64,7 +62,6 @@ class FragmentRecipe : Fragment() {
                         Log.d("mobileapp", "${response.body()}")
 
                         val newBody = response.body()?.replace(", \"food_List\"", "\"food_List\"")
-
                         val responseJson = Gson().fromJson(newBody, JsonResponseRecipe::class.java)
 
                         binding.jsonRecyclerView.adapter = JsonAdapterRecipe(binding.root.context, responseJson.response.list)
@@ -72,7 +69,7 @@ class FragmentRecipe : Fragment() {
                     }
                 }
                 override fun onFailure(call: Call<String>, t: Throwable) {
-                    Log.d("mobileapp", "onFailure")
+                    Log.d("mobileapp", "공공 데이터 획득 실패")
                     Log.d("mobileapp", "$t")
                 }
             })

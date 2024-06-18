@@ -22,30 +22,8 @@ class ExpandableAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(meal: Meal) {
             val txtName = binding.txtName
-            val imgMore = binding.imgMore
-            val layoutExpand = binding.layoutExpand
-
             txtName.text = meal.name
-
-//            imgMore.setOnClickListener {
-//                Log.d("mobileapp", "imgMore클릭")
-//                // 1
-//                val show = toggleLayout(!meal.isExpanded, it, layoutExpand)
-//                meal.isExpanded = show
-//            }
         }
-
-//        fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: LinearLayout): Boolean {
-//            // 2
-//            ToggleAnimation.toggleArrow(view, isExpanded)
-//            if (isExpanded) {
-//                Log.d("mobileapp", "expand")
-//                ToggleAnimation.expand(layoutExpand)
-//            } else {
-//                ToggleAnimation.collapse(layoutExpand)
-//            }
-//            return isExpanded
-//        }
     }
 
 
@@ -57,10 +35,8 @@ class ExpandableAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
         fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: LinearLayout): Boolean {
-            // 2
             ToggleAnimation.toggleArrow(view, isExpanded)
             if (isExpanded) {
-                Log.d("mobileapp", "expand")
                 ToggleAnimation.expand(layoutExpand)
             } else {
                 ToggleAnimation.collapse(layoutExpand)
@@ -71,9 +47,6 @@ class ExpandableAdapter(
         holder.bind(mealList[position])
 
         holder.binding.imgMore.setOnClickListener {
-
-            Log.d("mobileapp", "imgMore클릭")
-            // 1
             val show = toggleLayout(!mealList[position].isExpanded, it, holder.binding.layoutExpand)
             mealList[position].isExpanded = show
 
@@ -81,7 +54,6 @@ class ExpandableAdapter(
             Log.d("mobileapp", "${mealList[position].name}")
             if (MyApplication.checkAuth() || MyApplication.email != null) {
                 MyApplication.db.collection("meals")
-//                    .orderBy("date_time", Query.Direction.DESCENDING)
                     .whereEqualTo("email", MyApplication.email)
                     .whereEqualTo("checked_meal", mealList[position].name)
                     .whereEqualTo("date_time", selectedDate)

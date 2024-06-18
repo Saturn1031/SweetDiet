@@ -24,7 +24,7 @@
     <PreferenceCategory app:title="styles">
 
         <ListPreference
-            app:defaultValue="#00000000"
+            app:defaultValue="#FFF2E3DB"
             app:entries="@array/color_entries"
             app:entryValues="@array/color_values"
             app:key="color"

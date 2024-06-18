@@ -159,7 +159,7 @@ class FragmentMore : Fragment() {
             binding.userImage.setImageResource(R.drawable.user_basic)
         }
 
-        val color = sharedPreferences.getString("color", "#00000000")
+        val color = sharedPreferences.getString("color", "#FFF2E3DB")
         binding.userInfo.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color))
 
         val size = sharedPreferences.getString("size", "12.0f")

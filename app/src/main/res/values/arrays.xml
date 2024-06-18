@@ -1,19 +1,17 @@
 <resources>
     <!-- Reply Preference -->
     <string-array name="color_entries">
-        <item>빨강</item>
-        <item>노랑</item>
-        <item>초록</item>
-        <item>파랑</item>
-        <item>하양</item>
+        <item>oatmeal</item>
+        <item>green</item>
+        <item>deep_green</item>
+        <item>orange</item>
     </string-array>
 
     <string-array name="color_values">
-        <item>#ffAAAA</item>
-        <item>#ffffAA</item>
-        <item>#AAffAA</item>
-        <item>#AAAAff</item>
-        <item>#00000000</item>
+        <item>#FFF2E3DB</item>
+        <item>#FF41644A</item>
+        <item>#FF263A29</item>
+        <item>#FFE86A33</item>
     </string-array>
 
     <string-array name="size_entries">

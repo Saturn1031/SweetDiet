@@ -152,7 +152,7 @@ class FragmentRecord : Fragment() {
         val year = cal.get(Calendar.YEAR)
         val month = cal.get(Calendar.MONTH)
 
-        val lastDayOfMonth = cal.getMaximum(Calendar.DAY_OF_MONTH)
+        val lastDayOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
 
         for(i: Int in 1..lastDayOfMonth) {
             cal.set(year, month, i)
